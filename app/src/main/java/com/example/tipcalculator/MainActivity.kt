@@ -20,6 +20,19 @@ class MainActivity: AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.rbOptionOne.setOnCheckedChangeListener { _, isChecked ->
+            println("Mateus1 Option one" + isChecked)
+        }
+
+        binding.rbOptionTwo.setOnCheckedChangeListener { _, isChecked ->
+            println("Mateus option two"+ isChecked)
+        }
+
+        binding.rbOptionThree.setOnCheckedChangeListener { _, isChecked ->
+            println("Mateus option three" + isChecked)
+        }
+
+
         binding.btnClean.setOnClickListener {
             println("Mateus1"+ binding.tieTotal.text)
             println("Mateus1"+ binding.tieNumPeople.text)
