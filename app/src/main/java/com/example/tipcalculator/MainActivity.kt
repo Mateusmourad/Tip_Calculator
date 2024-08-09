@@ -58,7 +58,7 @@ class MainActivity: AppCompatActivity() {
             val totalTemp = totalTable / nPeople
             val tips = totalTemp * percentage / 100
             val totalWithTips = totalTemp + tips
-            println("Mateus1 "+ totalWithTips)
+            binding.tvResult.text = "Total with Tips:$totalWithTips"
         }
     }
 
