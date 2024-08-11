@@ -52,13 +52,34 @@ class MainActivity: AppCompatActivity() {
         }
 
         binding.btnDone.setOnClickListener {
-            val totalTable: Float = binding.tieTotal.text.toString().toFloat()
-            val nPeople: Int = binding.tieNumPeople.text.toString().toInt()
+            val totalTableTemp = binding.tieTotal.text
+            val nPeopleTemp = binding.tieNumPeople.text
+
+            if (totalTableTemp?.isEmpty() == true ||
+                nPeopleTemp?.isEmpty() == true
+            ) {
+                Snackbar.make(binding.tieTotal, "Preencha todos os campos", Snackbar.LENGTH_LONG)
+                    .show()
+
+            } else {
+
+            val totalTable: Float = totalTableTemp.toString().toFloat()
+            val nPeople: Int = nPeopleTemp.toString().toInt()
 
             val totalTemp = totalTable / nPeople
             val tips = totalTemp * percentage / 100
             val totalWithTips = totalTemp + tips
             binding.tvResult.text = "Total with Tips:$totalWithTips"
+            }
+        }
+
+        binding.btnClean.setOnClickListener {
+            binding.tvResult.text = ""
+            binding.tieTotal.setText("")
+            binding.tieNumPeople.setText("")
+            binding.rbOptionThree.isChecked = false
+            binding.rbOptionOne.isChecked = false
+            binding.rbOptionTwo.isChecked = false
         }
     }
 
