@@ -1,5 +1,6 @@
 package com.example.tipcalculator
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -90,23 +91,39 @@ var numOfPeopleSelected = 0
 
             } else {
 
-            val totalTable: Float = totalTableTemp.toString().toFloat()
-            val nPeople: Int = numOfPeopleSelected
+                val totalTable: Float = totalTableTemp.toString().toFloat()
+                val nPeople: Int = numOfPeopleSelected
 
-            val totalTemp = totalTable / nPeople
-            val tips = totalTemp * percentage / 100
-            val totalWithTips = totalTemp + tips
-            binding.tvResult.text = "Total with Tips:$totalWithTips"
+                val totalTemp = totalTable / nPeople
+                val tips = totalTemp * percentage / 100
+                val totalWithTips = totalTemp + tips
+
+                val intent = Intent( this, SummaryActivity::class.java)
+                intent.apply {
+                    putExtra("totalTable", totalTable)
+                    putExtra("numPeople", numOfPeopleSelected)
+                    putExtra("percentage", percentage)
+                    putExtra("totalAmount", totalWithTips)
+                }
+                clean()
+                startActivity(intent)
+
             }
         }
 
         binding.btnClean.setOnClickListener {
-            binding.tvResult.text = ""
-            binding.tieTotal.setText("")
-            binding.rbOptionThree.isChecked = false
-            binding.rbOptionOne.isChecked = false
-            binding.rbOptionTwo.isChecked = false
+            // binding.tvResult.text = ""
+          clean()
         }
+    }
+
+    private fun clean() {
+        binding.tieTotal.setText("")
+        binding.rbOptionThree.isChecked = false
+        binding.rbOptionOne.isChecked = false
+        binding.rbOptionTwo.isChecked = false
+
+
     }
 
 }
